@@ -1,20 +1,17 @@
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
-type ButtonProps = {
+type ButtonProps = ComponentProps<"button"> & {
   children: ReactNode;
   variant?: "primary" | "secondary" | "destructive";
-  disabled?: boolean;
-  onClick?: () => void;
-  className?: string;
 };
 
 export default function Button({
   children,
   variant = "primary",
-  disabled,
-  onClick,
   className,
+  disabled,
+  ...props
 }: ButtonProps) {
   const variantClasses = {
     primary: "bg-foreground text-primary",
@@ -34,7 +31,7 @@ export default function Button({
   );
 
   return (
-    <button className={classes} onClick={onClick} disabled={disabled}>
+    <button {...props} className={classes}>
       {children}
     </button>
   );

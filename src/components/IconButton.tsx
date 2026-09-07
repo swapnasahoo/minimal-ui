@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 type IconButtonProps = ComponentProps<"button"> & {
   icon: ReactNode;
-  variant?: "primary" | "secondary" | "destructive";
+  variant?: "primary" | "secondary" | "outline" | "destructive";
 };
 
 export default function IconButton({
@@ -16,6 +16,7 @@ export default function IconButton({
   const variantClasses = {
     primary: "bg-background text-foreground",
     secondary: "bg-background/70 text-foreground",
+    outline: "bg-transparent text-foreground border border-border",
     destructive: "bg-destructive text-foreground",
   };
 

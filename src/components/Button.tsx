@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 type ButtonProps = ComponentProps<"button"> & {
   children: ReactNode;
-  variant?: "primary" | "secondary" | "destructive";
+  variant?: "primary" | "secondary" | "outline" | "destructive";
   icon?: ReactNode;
   trailingIcon?: ReactNode;
 };
@@ -20,6 +20,7 @@ export default function Button({
   const variantClasses = {
     primary: "bg-foreground text-primary",
     secondary: "bg-background/70 text-foreground border border-border",
+    outline: "bg-transparent text-foreground border border-border",
     destructive: "bg-destructive text-foreground",
   };
 

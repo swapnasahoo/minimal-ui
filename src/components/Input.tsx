@@ -1,4 +1,5 @@
-import type { ComponentProps } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { useState, type ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 
 type InputProps = ComponentProps<"input"> & {
@@ -6,6 +7,11 @@ type InputProps = ComponentProps<"input"> & {
 };
 
 export default function Input({ error, className, ...props }: InputProps) {
+  const [isPasswordShown, setIsPasswordShown] = useState<boolean>(false);
+
+  const isPassword = props.type === "password";
+  const inputType = isPassword && isPasswordShown ? "text" : props.type;
+
   const borderClasses = error
     ? "border-destructive/80 focus:border-destructive"
     : "border-border focus:border-foreground";
@@ -16,5 +22,16 @@ export default function Input({ error, className, ...props }: InputProps) {
     borderClasses,
   );
 
-  return <input {...props} className={classes} />;
+  return (
+    <div className="relative">
+      <input {...props} type={inputType} className={classes} />
+
+      <button
+        onClick={() => setIsPasswordShown(!isPasswordShown)}
+        className="absolute text-foreground top-2 right-3 cursor-pointer"
+      >
+        {isPassword && (isPasswordShown ? <Eye /> : <EyeOff />)}
+      </button>
+    </div>
+  );
 }

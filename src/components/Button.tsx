@@ -25,7 +25,7 @@ export default function Button({
 
   const stateClasses = disabled
     ? "opacity-50 cursor-not-allowed"
-    : "cursor-pointer";
+    : "cursor-pointer hover:opacity-95";
 
   const classes = twMerge(
     `w-max-content px-8 py-1.5 rounded-md font-medium flex flex-row items-center justify-center gap-2`,

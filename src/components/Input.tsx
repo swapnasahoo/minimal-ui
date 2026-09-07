@@ -39,12 +39,14 @@ export default function Input({
         <span className="absolute text-foreground top-2 left-3">{icon}</span>
       )}
 
-      <button
-        onClick={() => setIsPasswordShown(!isPasswordShown)}
-        className="absolute text-foreground top-2 right-3 cursor-pointer"
-      >
-        {isPassword && (isPasswordShown ? <Eye /> : <EyeOff />)}
-      </button>
+      {isPassword && (
+        <button
+          onClick={() => setIsPasswordShown(!isPasswordShown)}
+          className="absolute text-foreground top-2 right-3 cursor-pointer"
+        >
+          {isPassword && (isPasswordShown ? <Eye /> : <EyeOff />)}
+        </button>
+      )}
 
       {/* icon (ending) */}
       {trailingIcon && (

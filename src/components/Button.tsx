@@ -31,7 +31,7 @@ export default function Button({
   );
 
   return (
-    <button {...props} className={classes}>
+    <button {...props} disabled={disabled} className={classes}>
       {children}
     </button>
   );

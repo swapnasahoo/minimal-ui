@@ -37,11 +37,11 @@ export default function Button({
 
   return (
     <button {...props} disabled={disabled} className={classes}>
-      {icon && <span className="text-primary">{icon}</span>}
+      {icon && <span>{icon}</span>}
 
       {children}
 
-      {trailingIcon && <span className="text-primary">{trailingIcon}</span>}
+      {trailingIcon && <span>{trailingIcon}</span>}
     </button>
   );
 }

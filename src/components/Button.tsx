@@ -4,6 +4,8 @@ import { twMerge } from "tailwind-merge";
 type ButtonProps = ComponentProps<"button"> & {
   children: ReactNode;
   variant?: "primary" | "secondary" | "destructive";
+  icon?: ReactNode;
+  trailingIcon?: ReactNode;
 };
 
 export default function Button({
@@ -11,6 +13,8 @@ export default function Button({
   variant = "primary",
   className,
   disabled,
+  icon,
+  trailingIcon,
   ...props
 }: ButtonProps) {
   const variantClasses = {
@@ -24,7 +28,7 @@ export default function Button({
     : "cursor-pointer";
 
   const classes = twMerge(
-    `w-max-content px-8 py-1.5 rounded-md font-medium`,
+    `w-max-content px-8 py-1.5 rounded-md font-medium flex flex-row items-center justify-center gap-2`,
     variantClasses[variant],
     stateClasses,
     className,
@@ -32,7 +36,11 @@ export default function Button({
 
   return (
     <button {...props} disabled={disabled} className={classes}>
+      {icon && <span className="text-primary">{icon}</span>}
+
       {children}
+
+      {trailingIcon && <span className="text-primary">{trailingIcon}</span>}
     </button>
   );
 }

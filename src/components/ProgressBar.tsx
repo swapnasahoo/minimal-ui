@@ -5,6 +5,8 @@ type ProgressBarProps = {
   max: number;
   trackColor?: string;
   barColor?: string;
+  rounded?: boolean;
+  height?: number;
 };
 
 export default function ProgressBar({
@@ -12,16 +14,22 @@ export default function ProgressBar({
   max,
   trackColor,
   barColor,
+  rounded = true,
+  height,
 }: ProgressBarProps) {
   const progress = Math.floor((value / max) * 100);
 
   const trackClasses = twMerge(
-    "w-full h-2 bg-background/90 rounded-full",
+    "w-full bg-background/90",
+    rounded && "rounded-full",
+    height ? `h-${height}` : "h-2",
     trackColor,
   );
 
   const barClasses = twMerge(
-    `w-[${progress}%] h-full bg-foreground rounded-full`,
+    `w-[${progress}%] bg-foreground`,
+    rounded && "rounded-full",
+    height ? `h-${height}` : "h-full",
     barColor,
   );
 

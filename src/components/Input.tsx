@@ -6,12 +6,14 @@ type InputProps = ComponentProps<"input"> & {
   error?: boolean;
   icon?: ReactNode;
   trailingIcon?: ReactNode;
+  label?: string;
 };
 
 export default function Input({
   error,
   icon,
   trailingIcon,
+  label,
   className,
   ...props
 }: InputProps) {
@@ -32,28 +34,35 @@ export default function Input({
   );
 
   return (
-    <div className="relative">
-      <input {...props} type={inputType} className={classes} />
-      {/* icon (starting) */}
-      {icon && (
-        <span className="absolute text-foreground top-2 left-3">{icon}</span>
+    <div>
+      {label && (
+        <label className="text-foreground font-semibold pb-1">{label}</label>
       )}
 
-      {isPassword && (
-        <button
-          onClick={() => setIsPasswordShown(!isPasswordShown)}
-          className="absolute text-foreground top-2 right-3 cursor-pointer"
-        >
-          {isPassword && (isPasswordShown ? <Eye /> : <EyeOff />)}
-        </button>
-      )}
+      <div className="relative">
+        <input {...props} type={inputType} className={classes} />
 
-      {/* icon (ending) */}
-      {trailingIcon && (
-        <span className="absolute text-foreground top-2 right-3">
-          {trailingIcon}
-        </span>
-      )}
+        {/* icon (starting) */}
+        {icon && (
+          <span className="absolute text-foreground top-2 left-3">{icon}</span>
+        )}
+
+        {isPassword && (
+          <button
+            onClick={() => setIsPasswordShown(!isPasswordShown)}
+            className="absolute text-foreground top-2 right-3 cursor-pointer"
+          >
+            {isPassword && (isPasswordShown ? <Eye /> : <EyeOff />)}
+          </button>
+        )}
+
+        {/* icon (ending) */}
+        {trailingIcon && (
+          <span className="absolute text-foreground top-2 right-3">
+            {trailingIcon}
+          </span>
+        )}
+      </div>
     </div>
   );
 }

@@ -7,6 +7,10 @@ type ProgressBarProps = {
   barColor?: string;
   rounded?: boolean;
   height?: number;
+  showPercentage?: boolean;
+  title?: string;
+  trackClassName?: string;
+  barClassName?: string;
 };
 
 export default function ProgressBar({
@@ -16,6 +20,10 @@ export default function ProgressBar({
   barColor,
   rounded = true,
   height,
+  showPercentage,
+  title,
+  trackClassName,
+  barClassName,
 }: ProgressBarProps) {
   const progress = Math.floor((value / max) * 100);
 
@@ -24,6 +32,7 @@ export default function ProgressBar({
     rounded && "rounded-full",
     height ? `h-${height}` : "h-2",
     trackColor,
+    trackClassName,
   );
 
   const barClasses = twMerge(
@@ -31,11 +40,22 @@ export default function ProgressBar({
     rounded && "rounded-full",
     height ? `h-${height}` : "h-full",
     barColor,
+    barClassName,
   );
 
   return (
-    <div className={trackClasses}>
-      <div className={barClasses}></div>
+    <div>
+      {title && <p className="text-foreground font-medium">{title}</p>}
+
+      <div className="flex flex-row items-center gap-1">
+        <div className={trackClasses}>
+          <div className={barClasses}></div>
+        </div>
+
+        {showPercentage && (
+          <p className="text-foreground font-medium text-sm">{progress}%</p>
+        )}
+      </div>
     </div>
   );
 }
